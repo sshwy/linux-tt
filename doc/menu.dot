@@ -1,0 +1,9 @@
+digraph menu{
+    menu->easy;
+    menu->medium;
+    menu->hard;
+    menu->custom;
+
+    custom->import;
+}
+

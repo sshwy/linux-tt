@@ -1,0 +1,20 @@
+digraph design{
+    graph[nodesep=1, ranksep=2];
+    node[shape=circle];
+    home->exit;
+    home->menu;
+    home->about;
+
+    menu->start;
+    menu->home[label="back home"]
+    start->input;
+    input->menu[label="exit"];
+    input->input[label="next"];
+    input->incorrect[label="bad charater"];
+    input->finish->menu;
+    incorrect->incorrect[label="not backspace"];
+    incorrect->input[label="several backspaces"];
+    incorrect->menu[label="exit"];
+
+    about->home[label="back home"];
+}
