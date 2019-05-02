@@ -1,0 +1,25 @@
+const int N=1e4+4,M=1e5+5,INF=0x3f3f3f3f;
+int n,m,s,t,maxflow,d[N];
+bool bfs(){
+    memset(d,0,sizeof(d));
+    queue<int> q;
+    q.push(s),d[s]=1;
+    while(q.size()){
+        int u=q.front();q.pop();
+        for(int i=h[u];i;i=e[i].nex){const int &v=e[i].t,&w=e[i].v;
+            if(!d[v]&&w)d[v]=d[u]+1,q.push(v);
+        }
+    }
+    return d[t];
+}
+int dinic(int u,int flow){
+    if(u==t)return flow;
+    int k,rest=flow;
+    for(int i=h[u];i&&rest;i=e[i].nex){const int &v=e[i].t,&w=e[i].v;//rest>0
+        if(!w||d[v]!=d[u]+1)continue;
+        k=dinic(v,min(rest,w));
+        if(k)e[i].v-=k,e[i^1].v+=k,rest-=k;
+        else d[v]=0;
+    }
+    return flow-rest;
+}
